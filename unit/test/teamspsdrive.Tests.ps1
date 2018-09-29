@@ -174,17 +174,17 @@ Describe 'TeamsPSDrive' {
       It 'Should return builds, releases, repositories and teams' {
          $actual | Should Not Be $null
          $actual[0].Name | Should Be 'Build Definitions'
-         $actual[0].ProjectName | Should Be 'TestProject'
+         $actual[0]._project | Should Be 'TestProject'
          $actual[1].Name | Should Be 'Builds'
-         $actual[1].ProjectName | Should Be 'TestProject'
+         $actual[1]._project | Should Be 'TestProject'
          $actual[2].Name | Should Be 'Queues'
-         $actual[2].ProjectName | Should Be 'TestProject'
+         $actual[2]._project | Should Be 'TestProject'
          $actual[3].Name | Should Be 'Releases'
-         $actual[3].ProjectName | Should Be 'TestProject'
+         $actual[3]._project | Should Be 'TestProject'
          $actual[4].Name | Should Be 'Repositories'
-         $actual[4].ProjectName | Should Be 'TestProject'
+         $actual[4]._project | Should Be 'TestProject'
          $actual[5].Name | Should Be 'Teams'
-         $actual[5].ProjectName | Should Be 'TestProject'
+         $actual[5]._project | Should Be 'TestProject'
       }
    }
 
@@ -264,10 +264,41 @@ Describe 'TeamsPSDrive' {
    }
 
    Context 'Builds' {
-      Mock Get-VSTeamBuild { return @([PSCustomObject]@{
+      Mock Get-VSTeamBuild { return @(
+            [PSCustomObject]@{
                id            = 1
                description   = ''
                buildNumber   = '1'
+               status        = 'completed'
+               result        = 'succeeded'
+               startTime     = Get-Date
+               lastChangedBy = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               requestedBy   = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               requestedFor  = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               definition    = [PSCustomObject]@{
+                  name     = 'Test CI'
+                  fullname = 'Test CI'
+               }
+               project       = [PSCustomObject]@{
+                  name = 'Test Project'
+               }
+            },
+            [PSCustomObject]@{
+               id            = 2
+               description   = ''
+               buildNumber   = '2'
                status        = 'completed'
                result        = 'succeeded'
                startTime     = Get-Date
@@ -297,6 +328,9 @@ Describe 'TeamsPSDrive' {
          )
       }
 
+      $expectedLog = 'build log'
+      Mock Get-VSTeamBuildLog { return $expectedLog } -ParameterFilter { $ProjectName -eq 'TestProject' }
+
       $builds = [VSTeamBuilds]::new('TestBuild', 'TestProject')
 
       It 'Should create Builds' {
@@ -306,7 +340,17 @@ Describe 'TeamsPSDrive' {
       $build = $builds.GetChildItem()
 
       It 'Should return build' {
-         $build | Should Not Be $null
+         $build[0] | Should Not Be $null
+      }
+
+      It 'Should have project name set' {
+         $build[0]._project | Should Be 'TestProject'
+      }
+
+      $actualLog = $build[0].GetContent()
+
+      It 'Should return build log' {
+         $actualLog | Should be $expectedLog
       }
    }
 

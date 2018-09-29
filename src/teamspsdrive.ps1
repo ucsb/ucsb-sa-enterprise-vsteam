@@ -100,14 +100,14 @@ class VSTeamDirectory : SHiPSDirectory {
    # l - Reparse point, symlink, etc.
    [string] hidden $DisplayMode = 'd-----'
 
-   [string]$ProjectName = $null
+   [string]$_project = $null
 
    # Default constructor
    VSTeamDirectory(
       [string]$Name,
       [string]$ProjectName
    ) : base($Name) {
-      $this.ProjectName = $ProjectName
+      $this._project = $ProjectName
    }
 
    [void] hidden AddTypeName(
@@ -131,7 +131,7 @@ class VSTeamLeaf : SHiPSLeaf {
    [object] hidden $_internalObj = $null
 
    [string]$ID = $null
-   [string]$ProjectName = $null
+   [string]$_project = $null
 
    # I want the mode to resemble that of
    # a normal file system.
@@ -150,7 +150,7 @@ class VSTeamLeaf : SHiPSLeaf {
       [string]$ProjectName
    ) : base($Name) {
       $this.ID = $ID
-      $this.ProjectName = $ProjectName
+      $this._project = $ProjectName
    }
 
    [void] hidden AddTypeName(
@@ -348,7 +348,7 @@ class VSTeamQueues : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamQueue -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamQueue -ProjectName $this._project -ErrorAction SilentlyContinue
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Queue')
@@ -523,14 +523,14 @@ class VSTeamBuilds : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $builds = Get-VSTeamBuild -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $builds = Get-VSTeamBuild -ProjectName $this._project -ErrorAction SilentlyContinue
 
       $objs = @()
 
       foreach ($build in $builds) {
          $item = [VSTeamBuild]::new(
             $build,
-            $build.project.name)
+            $this._project)
 
          $item.AddTypeName('Team.Provider.Build')
 
@@ -550,7 +550,7 @@ class VSTeamBuild : VSTeamLeaf {
    [VSTeamUser]$RequestedBy = $null
    [VSTeamUser]$RequestedFor = $null
    [VSTeamUser]$LastChangedBy = $null
-
+   
    VSTeamBuild (
       [object]$obj,
       [string]$Projectname
@@ -568,6 +568,25 @@ class VSTeamBuild : VSTeamLeaf {
 
       $this.AddTypeName('Team.Build')
    }
+   
+   [string] GetContent()
+   {
+      $bp = $this.ProviderContext.BoundParameters
+      
+      if ($bp)
+      {
+         # Get-Content -Index 2
+         if ($bp.Index)
+         {
+            return Get-VSTeamBuildLog -ProjectName $this._project -Id $this.id -Index $bp.Index
+         }
+      }
+      
+      Write-Verbose "Id $($this.Id)"
+      Write-Verbose "Project2 $($this._project)"
+      
+      return Get-VSTeamBuildLog -ProjectName $this._project -Id $this.Id
+    }
 }
 
 [SHiPSProvider(UseCache = $true)]
@@ -583,7 +602,7 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamBuildDefinition -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamBuildDefinition -ProjectName $this._project -ErrorAction SilentlyContinue
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.BuildDefinition')
@@ -843,14 +862,14 @@ class VSTeamReleases : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand Environments -ErrorAction SilentlyContinue
+      $releases = Get-VSTeamRelease -ProjectName $this._project -Expand Environments -ErrorAction SilentlyContinue
 
       $objs = @()
 
       foreach ($release in $releases) {
          $item = [VSTeamRelease]::new(
             $release,
-            $this.ProjectName)
+            $this._project)
 
          $item.AddTypeName('Team.Provider.Release')
 
@@ -894,7 +913,7 @@ class VSTeamRelease : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $envs = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.id -Expand Environments | Select-Object -ExpandProperty Environments
+      $envs = Get-VSTeamRelease -ProjectName $this._project -Id $this.id -Expand Environments | Select-Object -ExpandProperty Environments
 
       $obj = @()
 
@@ -902,7 +921,7 @@ class VSTeamRelease : VSTeamDirectory {
          $obj += [VSTeamEnvironment]::new(
             $env.name,
             $env.status,
-            $this.projectname,
+            $this._project,
             $this.id,
             $env.Id)
       }
@@ -933,7 +952,7 @@ class VSTeamEnvironment : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $attempts = Get-VSTeamRelease -ProjectName $this.ProjectName -Id $this.releaseId -Expand Environments `
+      $attempts = Get-VSTeamRelease -ProjectName $this._project -Id $this.releaseId -Expand Environments `
          | Select-Object -ExpandProperty environments `
          | Where-Object id -eq $this.environmentid `
          | Select-Object -ExpandProperty deploysteps
@@ -944,7 +963,7 @@ class VSTeamEnvironment : VSTeamDirectory {
          $item = [VSTeamAttempt]::new(
             'Attempt ' + $attempt.Attempt,
             $attempt.status,
-            $this.projectname,
+            $this._project,
             $this.releaseId,
             $this.environmentid,
             $attempt.id)
@@ -983,7 +1002,7 @@ class VSTeamAttempt: VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $Tasks = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.releaseId -Expand Environments `
+      $Tasks = Get-VSTeamRelease -ProjectName $this._project -Id $this.releaseId -Expand Environments `
          | Select-Object -ExpandProperty environments `
          | Where-Object id -eq $this.environmentid `
          | Select-Object -ExpandProperty deploysteps `
@@ -994,7 +1013,7 @@ class VSTeamAttempt: VSTeamDirectory {
       $obj = @()
 
       foreach ($Task in $Tasks) {
-         $item = [VSTeamTask]::new($Task, $this.projectName)
+         $item = [VSTeamTask]::new($Task, $this._project)
 
          $item.AddTypeName('Team.Provider.Task')
 
@@ -1034,7 +1053,7 @@ class VSTeamRepositories : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamGitRepository -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamGitRepository -ProjectName $this._project -ErrorAction SilentlyContinue
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Repository')
@@ -1089,7 +1108,7 @@ class VSTeamGitRepository : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamGitRef -ProjectName $this.ProjectName -RepositoryID $this.id -ErrorAction SilentlyContinue
+      $items = Get-VSTeamGitRef -ProjectName $this._project -RepositoryID $this.id -ErrorAction SilentlyContinue
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.GitRef')
@@ -1131,7 +1150,7 @@ class VSTeamTeams : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeam -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeam -ProjectName $this._project -ErrorAction SilentlyContinue
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Team')
