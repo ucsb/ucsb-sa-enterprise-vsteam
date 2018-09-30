@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.0
+
+Added support for Get-Content to provider using SHiPS 0.8.1. Be sure you have the latest version of SHiPS or you will get errors.
+
 ## 4.0.9
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:

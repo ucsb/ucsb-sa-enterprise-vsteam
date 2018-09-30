@@ -100,7 +100,7 @@ class VSTeamDirectory : SHiPSDirectory {
    # l - Reparse point, symlink, etc.
    [string] hidden $DisplayMode = 'd-----'
 
-   [string]$_project = $null
+   [string] hidden $_project = $null
 
    # Default constructor
    VSTeamDirectory(
