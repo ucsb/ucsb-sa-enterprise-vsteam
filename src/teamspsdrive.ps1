@@ -80,6 +80,7 @@ class VSTeamVersions {
    static [string] $ExtensionsManagement = ''
    static [string] $ServiceFabricEndpoint = ''
    static [string] $ModuleVersion = $null
+   static [string] $Hooks = '3.0'
 }
 
 # Dynamic parameters get called alot. This can cause

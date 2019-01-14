@@ -392,6 +392,7 @@ function Get-VSTeamAPIVersion {
       Release                     = $([VSTeamVersions]::Release)
       Core                        = $([VSTeamVersions]::Core)
       Git                         = $([VSTeamVersions]::Git)
+      Hook                        = $([VSTeamVersions]::Hooks)
       DistributedTask             = $([VSTeamVersions]::DistributedTask)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
       Packaging                   = $([VSTeamVersions]::Packaging)
@@ -419,6 +420,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '4.0-preview'
             [VSTeamVersions]::DistributedTask = '4.0-preview'
             [VSTeamVersions]::Tfvc = '3.2'
+            [VSTeamVersions]::Hooks = '3.2'
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
@@ -432,6 +434,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '4.1-preview'
             [VSTeamVersions]::DistributedTask = '4.1-preview'
             [VSTeamVersions]::Tfvc = '4.0'
+            [VSTeamVersions]::Hooks = '4.0'
             [VSTeamVersions]::Packaging = '4.0-preview'
             [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
             [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
@@ -445,6 +448,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '3.0-preview'
             [VSTeamVersions]::DistributedTask = '3.0-preview'
             [VSTeamVersions]::Tfvc = '3.0'
+            [VSTeamVersions]::Hooks = '3.0'
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = ''
@@ -456,6 +460,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose [VSTeamVersions]::Version
    Write-Verbose "Git: $([VSTeamVersions]::Git)"
    Write-Verbose "Core: $([VSTeamVersions]::Core)"
+   Write-Verbose "Hook: $([VSTeamVersions]::Hooks)"
    Write-Verbose "Build: $([VSTeamVersions]::Build)"
    Write-Verbose "Release: $([VSTeamVersions]::Release)"
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"

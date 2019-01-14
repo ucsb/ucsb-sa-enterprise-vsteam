@@ -29,7 +29,7 @@ This command returns all the web hooks registered for this project.
 The id of the web hook.
 
 ```yaml
-Type: Int32
+Type: guid
 Parameter Sets: ByID
 Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)

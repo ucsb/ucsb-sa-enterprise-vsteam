@@ -112,7 +112,7 @@ InModuleScope workitems {
 
       Context 'Get-WorkItem' {
 
-         It 'Without Default Project should add work item' {
+         It 'Should return a list of work items' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
                # Write-Host $args
@@ -137,7 +137,7 @@ InModuleScope workitems {
             }
          }
 
-         It 'With Default Project should add work item' {
+         It 'Should return a single work item' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
                # Write-Host $args
