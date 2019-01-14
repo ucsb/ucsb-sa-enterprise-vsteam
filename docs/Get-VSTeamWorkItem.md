@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Returns one or more a work items from your project.
+Returns one or more work items from your project.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Returns one or more a work items from your project.
+Returns one or more work items from your project.
 
 ## EXAMPLES
 
@@ -21,7 +21,7 @@ Returns one or more a work items from your project.
 PS C:\> Get-VSTeamWorkItem -Ids 47,48
 ```
 
-This command gets work items with IDs 47 and 48 by using the ID parameter.
+This command gets work items with IDs 47 and 48 by using the IDs parameter.
 
 ## PARAMETERS
 
