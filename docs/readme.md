@@ -240,9 +240,13 @@ Gets root branches for all projects with TFVC source control.
 
 Returns a list of users for the account.
 
+### [Get-VSTeamWebHook](Get-VSTeamWebHook.md)
+
+Returns one or more web hooks from your project.
+
 ### [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
 
-Returns one or more a work items from your project.
+Returns one or more work items from your project.
 
 ### [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
 
