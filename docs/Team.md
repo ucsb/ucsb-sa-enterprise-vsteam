@@ -223,6 +223,10 @@ Gets a service endpoint.
 
 Get service endpoint types.
 
+### [Get-VSTeamServiceHook](Get-VSTeamServiceHook.md)
+
+Returns one or more web hooks from your project.
+
 ### [Get-VSTeamTfvcBranch](Get-VSTeamTfvcBranch.md)
 
 Gets a branch for a given path from TFVC source control.
@@ -374,6 +378,14 @@ Opens the release summary in the default browser.
 ### [Show-VSTeamReleaseDefinition](Show-VSTeamReleaseDefinition.md)
 
 Opens the release definitions for a team project in the default browser.
+
+### [Show-VSTeamServiceHook](Show-VSTeamServiceHook.md)
+
+Opens the service hooks in the default browser.
+
+### [Show-VSTeamWebHook](Show-VSTeamWebHook.md)
+
+Opens the web hooks in the default browser.
 
 ### [Show-VSTeamWorkItem](Show-VSTeamWorkItem.md)
 

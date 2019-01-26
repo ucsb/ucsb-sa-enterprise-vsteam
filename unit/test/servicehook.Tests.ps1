@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
-InModuleScope webhooks {
+InModuleScope servicehooks {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-   Describe 'webhooks'{
+   Describe 'servicehooks'{
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -22,18 +22,18 @@ InModuleScope webhooks {
          value = @($obj)
       }
 
-      Context 'Show-WebHooks' {         
+      Context 'Show-ServiceHooks' {         
          Mock Show-Browser { }
 
          It 'Should open browser' {
-            Show-VSTeamWebHook -projectName project
+            Show-VSTeamServiceHook -projectName project
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://dev.azure.com/test/project/_settings/serviceHooks' }
          }
       }
 
-      Context 'Get-WebHooks' {         
-         It 'Should return a list of web hooks' {
+      Context 'Get-ServiceHooks' {         
+         It 'Should return a list of service hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
                # Write-Host $args
@@ -41,18 +41,17 @@ InModuleScope webhooks {
                return $collection
             }
 
-            Get-VSTeamWebHook
+            Get-VSTeamServiceHook
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/hooks/subscriptions*" -and
-               $Uri -like "*consumerId=webHooks*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Hooks)*"
             }
          }
       }
 
-      Context 'Get-WebHooks by ID' {
-         It 'Should return a list of web hooks' {
+      Context 'Get-ServiceHooks by ID' {
+         It 'Should return a list of service hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.               
                # Write-Host $args
@@ -60,7 +59,7 @@ InModuleScope webhooks {
                return $obj
             }
 
-            Get-VSTeamWebHook -Id 00000000-0000-0000-0000-000000000000
+            Get-VSTeamServiceHook -Id 00000000-0000-0000-0000-000000000000
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/hooks/subscriptions*" -and

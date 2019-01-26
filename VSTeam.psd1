@@ -89,6 +89,7 @@
       'formats\workitemTypes.format.ps1xml',
       'formats\workitems.format.ps1xml',
       'formats\webhooks.format.ps1xml',
+      'formats\servicehooks.format.ps1xml',
       'formats\vsteamPSDrive.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
@@ -119,7 +120,8 @@
       'src\feeds.psm1',
       'src\pullrequest.psm1',
       'src\extensions.psm1',
-      'src\webhooks.psm1')
+      'src\webhooks.psm1',
+      'src\servicehooks.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -223,7 +225,10 @@
       'Update-VSTeamExtension',
       'Remove-VSTeamExtension',
       'Update-VSTeamWorkItem',
-      'Get-VSTeamWebHook')
+      'Get-VSTeamWebHook',
+      'Get-VSTeamServiceHook',
+      'Show-VSTeamWebHook',
+      'Show-VSTeamServiceHook')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -342,7 +347,10 @@
       'Update-Extension',
       'Remove-Extension',
       'Update-WorkItem',
-      'Get-WebHook')
+      'Get-WebHook',
+      'Get-ServiceHook',
+      'Show-WebHook',
+      'Show-ServiceHook')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
