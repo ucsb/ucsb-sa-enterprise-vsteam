@@ -17,11 +17,6 @@ Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery
 
 Adds a team to a team project.
 
-### [Add-VSTeamAccount](Add-VSTeamAccount.md)
-
-Stores your account name and personal access token for use with the other
-functions in this module.
-
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
 Adds a new Azure Resource Manager service endpoint.
@@ -187,6 +182,10 @@ Get the policy types in the specified Visual Studio Team Services or Team Founda
 
 Returns the agent pools.
 
+### [Get-VSTeamProcess](Get-VSTeamProcess.md)
+
+Returns a list of process templates in the Team Services or Team Foundation Server account.
+
 ### [Get-VSTeamProfile](Get-VSTeamProfile.md)
 
 Returns the saved profiles.
@@ -318,6 +317,15 @@ Removes a service endpoint.
 ### [Remove-VSTeamUser](Remove-VSTeamUser.md)
 
 Removes a user from the account.
+
+### [Set-VSTeamAccount](Set-VSTeamAccount.md)
+
+Stores your account name and personal access token for use with the other
+functions in this module.
+
+### [Set-VSTeamAlias](Set-VSTeamAlias.md)
+
+In version 6.0 the default aliases were removed to prevent conflicts with other modules. If you want to use the original aliases you can run this function to restore them.
 
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 

@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope workitems {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'workitems' {
@@ -54,6 +54,26 @@ InModuleScope workitems {
                $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Title*' -and
                $Body -like '*/fields/System.Description*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should add work item with parent' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Description*' -and
+               $Body -like '*/relations/-*' -and
+               $Body -like '*_apis/wit/workitems/25*' -and
+               $Body -like '*System.LinkTypes.Hierarchy-Reverse*' -and
                $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
