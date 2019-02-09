@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Returns one or more a work items from your project.
+Returns one or more work items from your project.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Returns one or more a work items from your project.
+Returns one or more work items from your project.
 
 ## EXAMPLES
 
