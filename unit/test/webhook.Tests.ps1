@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope webhooks {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'webhooks'{
@@ -22,7 +22,7 @@ InModuleScope webhooks {
          value = @($obj)
       }
 
-      Context 'Show-WebHooks' {         
+      Context 'Show-VSTeamWebHooks' {         
          Mock Show-Browser { }
 
          It 'Should open browser' {
@@ -32,7 +32,7 @@ InModuleScope webhooks {
          }
       }
 
-      Context 'Get-WebHooks' {         
+      Context 'Get-VSTeamWebHooks' {         
          It 'Should return a list of web hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
@@ -51,7 +51,7 @@ InModuleScope webhooks {
          }
       }
 
-      Context 'Get-WebHooks by ID' {
+      Context 'Get-VSTeamWebHooks by ID' {
          It 'Should return a list of web hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.               

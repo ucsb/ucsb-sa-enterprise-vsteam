@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope servicehooks {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'servicehooks'{
@@ -22,7 +22,7 @@ InModuleScope servicehooks {
          value = @($obj)
       }
 
-      Context 'Show-ServiceHooks' {         
+      Context 'Show-VSTeamServiceHooks' {         
          Mock Show-Browser { }
 
          It 'Should open browser' {
@@ -32,7 +32,7 @@ InModuleScope servicehooks {
          }
       }
 
-      Context 'Get-ServiceHooks' {         
+      Context 'Get-VSTeamServiceHooks' {         
          It 'Should return a list of service hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
@@ -50,7 +50,7 @@ InModuleScope servicehooks {
          }
       }
 
-      Context 'Get-ServiceHooks by ID' {
+      Context 'Get-VSTeamServiceHooks by ID' {
          It 'Should return a list of service hooks' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.               

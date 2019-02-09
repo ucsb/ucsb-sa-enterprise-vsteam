@@ -115,6 +115,14 @@ function Set-VSTeamAlias {
       New-Alias Get-Extension Get-VSTeamExtension -Scope Global
       New-Alias Update-Extension Update-VSTeamExtension -Scope Global
       New-Alias Remove-Extension Remove-VSTeamExtension -Scope Global
-      New-Alias Update-WorkItem  Update-VSTeamWorkItem  -Scope Global
+      New-Alias Update-WorkItem Update-VSTeamWorkItem -Scope Global
+      New-Alias Add-ServiceHook Add-VSTeamServiceHook -Scope Global
+      New-Alias Get-ServiceHook Get-VSTeamServiceHook -Scope Global
+      New-Alias Show-ServiceHook Show-VSTeamServiceHook -Scope Global
+      New-Alias Update-ServiceHook Update-VSTeamServiceHook -Scope Global
+      New-Alias Add-WebHook Add-VSTeamWebHook -Scope Global
+      New-Alias Get-WebHook Get-VSTeamWebHook -Scope Global
+      New-Alias Show-WebHook Show-VSTeamWebHook -Scope Global
+      New-Alias Update-WebHook Update-VSTeamWebHook -Scope Global
    }
 }

@@ -62,6 +62,7 @@ Specifies the service to change. The acceptable values for this parameter are:
 - MemberEntitlementManagement
 - ExtensionsManagement
 - ServiceFabricEndpoint
+- Hooks
 
 ```yaml
 Type: String
