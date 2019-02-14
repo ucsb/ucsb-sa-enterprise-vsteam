@@ -124,5 +124,6 @@ function Set-VSTeamAlias {
       New-Alias Get-WebHook Get-VSTeamWebHook -Scope Global
       New-Alias Show-WebHook Show-VSTeamWebHook -Scope Global
       New-Alias Update-WebHook Update-VSTeamWebHook -Scope Global
+      New-Alias Remove-WebHook Remove-VSTeamWebHook -Scope Global
    }
 }

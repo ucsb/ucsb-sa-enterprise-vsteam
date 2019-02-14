@@ -18,7 +18,7 @@ InModuleScope VSTeam {
       }
 
       Context '_buildProjectNameDynamicParam set Alias' {
-         Mock _getProjects
+         Mock _getProjectNames
 
          $actual = _buildProjectNameDynamicParam -AliasName TestAlias
 
@@ -66,7 +66,7 @@ InModuleScope VSTeam {
       }
 
       Context '_buildProjectNameDynamicParam' {
-         Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
+         Mock _getProjectNames { return  ConvertFrom-Json '["Demo", "Universal"]' }
 
          It 'should return dynamic parameter' {
             _buildProjectNameDynamicParam | Should Not BeNullOrEmpty

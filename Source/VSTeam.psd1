@@ -13,7 +13,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.0.1'
+   ModuleVersion     = '6.0.2'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -31,7 +31,7 @@
    Copyright         = '(c) 2016 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description       = 'Adds functionality for working with Visual Studio Team Services and Team Foundation Server.'
+   Description       = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
 
    # Minimum version of the Windows PowerShell engine required by this module
    # PowerShellVersion = ''
@@ -202,7 +202,9 @@
       'Get-VSTeamServiceHook',
       'Show-VSTeamWebHook',
       'Show-VSTeamServiceHook',
-      'Set-VSTeamAlias')
+      'Set-VSTeamAlias',
+      'Add-VSTeamWebHook',
+      'Remove-VSTeamWebHook')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -228,7 +230,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
+         Tags       = @('AzD', 'ADO', 'AzDO', 'VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed

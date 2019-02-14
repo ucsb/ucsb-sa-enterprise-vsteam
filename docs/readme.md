@@ -95,6 +95,10 @@ Adds a new SonarQube service endpoint.
 
 Adds a user to the account.
 
+### [Add-VSTeamWebHook](Add-VSTeamWebHook.md)
+
+Adds a new web hook.
+
 ### [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
 
 Adds a work item to your project.

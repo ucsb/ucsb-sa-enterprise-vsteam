@@ -254,7 +254,7 @@ function _getWorkItemTypes {
    }
 }
 
-function _getProjects {
+function _getProjectNames {
    if (-not [VSTeamVersions]::Account) {
       Write-Output @()
       return
@@ -319,7 +319,7 @@ function _buildProjectNameDynamicParam {
 
    # Generate and set the ValidateSet
    if($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = _getProjects
+      $arrSet = _getProjectNames
       [VSTeamProjectCache]::projects = $arrSet
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
    }
