@@ -14,4 +14,5 @@ class VSTeamVersions {
    static [string] $ServiceFabricEndpoint = ''
    static [string] $ModuleVersion = $null
    static [string] $Hooks = '3.0'
+   static [string] $Graph = ''
 }
