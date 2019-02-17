@@ -58,7 +58,7 @@ Required: True
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: WorkItemCommentedOn, WorkItemRestored, WorkItemDeleted, WorkItemCreated
 Required: False
 ```
@@ -67,7 +67,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: WorkItemCommentedOn, WorkItemRestored, WorkItemDeleted, WorkItemCreated
 Required: False
 ```
@@ -92,7 +92,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: WorkItemUpdated
 Required: False
 ```
@@ -109,7 +109,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: BuildCompleted
 Required: False
 ```
@@ -118,7 +118,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: BuildCompleted
 Required: False
 ```
@@ -162,7 +162,7 @@ Required: False
 
 ### -MergeResult
 
-- \[Any\]
+- [Any]
 - Merge Successful
 - Merge Unsuccessful - Reason: Any
 - Merge Unsuccessful - Reason: Conflicts
@@ -171,14 +171,14 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: PullRequestMerge
 Required: False
 ```
 
 ### -PullRequestChange
 
-- \[Any\]
+- [Any]
 - Source branch updated
 - Reviewers changed
 - Status changed
@@ -186,7 +186,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: PullRequestUpdated
 Required: False
 ```
@@ -195,7 +195,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: ReleaseAbandonedOrCreated,ReleaseDeploymentApprovalCompleted, ReleaseDeploymentApprovalPending, ReleaseDeploymentCompleted, ReleaseDeploymentStarted
 Required: False
 ```
@@ -204,40 +204,40 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: ReleaseDeploymentApprovalCompleted, ReleaseDeploymentApprovalPending, ReleaseDeploymentCompleted, ReleaseDeploymentStarted
 Required: False
 ```
 
 ### -ApprovalType
 
-- \[Any\]
+- [Any]
 - Pre-deployment
 - Post-deployment
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: ReleaseDeploymentApprovalCompleted, ReleaseDeploymentApprovalPending
 Required: False
 ```
 
 ### -ApprovalStatus
 
-- \[Any\]
+- [Any]
 - Approved
 - Rejected
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: ReleaseDeploymentApprovalCompleted
 Required: False
 ```
 
 ### -ReleaseStatus
 
-- \[Any\]
+- [Any]
 - Canceled
 - Partially Succeeded
 - Failed
@@ -245,7 +245,7 @@ Required: False
 
 ```yaml
 Type: string
-Default value: \[Any\]
+Default value: [Any]
 Parameter Sets: ReleaseDeploymentCompleted
 Required: False
 ```

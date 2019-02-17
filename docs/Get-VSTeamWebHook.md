@@ -32,6 +32,7 @@ The id of the web hook.
 ```yaml
 Type: guid
 Parameter Sets: ByID
+Aliases: WebHookId
 Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```

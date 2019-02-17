@@ -163,6 +163,21 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Web Hook full exercise' {
+         It 'Add-VSTeamWebHook Should create web hook' {
+            Add-VSTeamWebHook -ProjectName $newProjectName -Trigger 'Build completed' -Url 'http://test.com' | Should Not Be $null 
+         }
+
+         It 'Get-VSTeamWebHook Should return web hook' {
+            Get-VSTeamWebHook | Should Not Be $null 
+         }
+
+         It 'Remove-VSTeamWebHook Should delete web hook' {
+            Get-VSTeamWebHook | Remove-VSTeamWebHook -Force
+            Get-VSTeamWebHook | Should Be $null 
+         }
+      }
+
       Context 'BuildDefinition full exercise' {
 
          Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
@@ -407,7 +422,6 @@ InModuleScope VSTeam {
             }
          }
       }
-
 
       Context 'Teams full exercise' {
          It 'Get-VSTeam ByName Should return Teams' {

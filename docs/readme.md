@@ -335,6 +335,10 @@ Removes a service endpoint.
 
 Removes a user from the account.
 
+### [Remove-VSTeamWebHook](Remove-VSTeamWebHook.md)
+
+Deletes a new web hook.
+
 ### [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 Stores your account name and personal access token for use with the other

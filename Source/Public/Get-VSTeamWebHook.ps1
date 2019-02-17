@@ -2,7 +2,7 @@ function Get-VSTeamWebHook {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, Position = 0)]
-      [Alias('SubscriptionId')]
+      [Alias('WebHookId')]
       [guid[]] $Id
    )
 

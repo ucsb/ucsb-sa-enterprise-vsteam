@@ -1,13 +1,25 @@
 # Changelog
 
+## 6.1.1
+
+Added
+- Add-VSTeamWebHook
+- Get-VSTeamWebHook
+- Show-VSTeamWebHook
+- Remove-VSTeamWebHook
+- Update-VSTeamWebHook
+- Get-VSTeamServiceHook
+- Show-VSTeamServiceHook
+
 ## 6.1.0
 
 The AzD API now defaults to the 5.x versions.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/140) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
-Added Get-VSTeamGroup to retrieve Groups
-Added Get-VSTeamDescriptor to resolve ID's to Descriptors
+Added
+- Get-VSTeamGroup to retrieve Groups
+- Get-VSTeamDescriptor to resolve ID's to Descriptors
 
 **Breaking changes**:
 
