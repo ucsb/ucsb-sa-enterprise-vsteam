@@ -390,10 +390,6 @@ InModuleScope VSTeam {
                (Get-VSTeamUser).Count | Should Be 2
             }
          }
-      }
-
-      # Not supported on TFS
-      if (-not ($acct -like "http://*")) {
 
          $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
 
@@ -421,8 +417,36 @@ InModuleScope VSTeam {
                Get-VSTeamFeed | Where-Object name -eq $FeedName | Should Be $null
             }
          }
-      }
 
+         Context 'Descriptor exercise' {
+            It 'Get-VSTeamDescriptor by project' {
+               Get-VSTeamProject | Select-Object -First 1 | Get-VSTeamDescriptor | Should Not Be $null
+            }
+
+            It 'Get-VSTeamDescriptor by user' {
+               Get-VSTeamUser | Select-Object -First 1 | Get-VSTeamDescriptor | Should Not Be $null
+            }
+         }
+
+         Context 'Group exercise' {
+            It 'Get-VSTeamGroup' {
+               (Get-VSTeamGroup).Count | Should Be 18
+            }
+
+            It 'Get-VSTeamGroup by project' {
+               (Get-VSTeamGroup -ProjectName $newProjectName).Count | Should Be 8
+            }
+
+            It 'Get-VSTeamGroup with SubjectTypes vssgp' {
+               (Get-VSTeamGroup -SubjectTypes vssgp).Count | Should Be 18
+            }
+
+            It 'Get-VSTeamGroup with SubjectTypes aadgp' {
+               Get-VSTeamGroup -SubjectTypes aadgp | Should Be $null
+            }
+         }
+      }
+      
       Context 'Teams full exercise' {
          It 'Get-VSTeam ByName Should return Teams' {
             Get-VSTeam -ProjectName $newProjectName -Name "$newProjectName Team" | Should Not Be $null
