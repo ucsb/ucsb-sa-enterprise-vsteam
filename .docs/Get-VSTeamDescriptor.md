@@ -14,16 +14,26 @@
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamUser | Select-Object -First 1 | Get-VSTeamDescriptor
+```
+
+This command gets the descriptor for the first user.
+
 ## PARAMETERS
 
 ### -StorageKey
 
-Storage key of the subject (user, group, scope, etc.) to resolve
+The id of the subject (user, group, scope, project, etc.) to resolve
 
 ```yaml
-Type: String
+Type: string
 Required: True
+Aliases: Id
 Parameter Sets: ByStorageKey
+Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
 ## INPUTS

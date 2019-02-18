@@ -1,7 +1,8 @@
 function Get-VSTeamDescriptor {
    [CmdletBinding(DefaultParameterSetName = 'ByStorageKey')]
    param(
-      [Parameter(ParameterSetName = 'ByStorageKey', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByStorageKey', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('Id')]
       [string] $StorageKey
    )
 
