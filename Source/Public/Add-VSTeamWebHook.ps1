@@ -129,80 +129,15 @@ function Add-VSTeamWebHook {
       
       $projectName = $PSBoundParameters["ProjectName"]
 
-      $eventId = ''
-      $publisherId = ''
       $consumerId = 'webHooks'
       $consumerActionId = 'httpRequest'
       
       # The user selected a project name but we need the id
       $projectId = Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty Id
 
-      switch ($Trigger) {         
-         'Build completed' {
-            $publisherId = 'tfs'
-            $eventId = 'build.complete'
-         }
-         'Code pushed' {
-            $publisherId = 'tfs'            
-            $eventId = 'git.push'
-         }
-         'Pull request created' {
-            $publisherId = 'tfs'            
-            $eventId = 'git.pullrequest.created'
-         }
-         'Pull request merge attempted' {
-            $publisherId = 'tfs'            
-            $eventId = 'git.pullrequest.merged'
-         }
-         'Pull request updated' {
-            $publisherId = 'tfs'            
-            $eventId = 'git.pullrequest.updated'
-         }
-         'Release abandoned' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.release-abandoned-event'
-         }
-         'Release created' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.release-created-event'
-         }
-         'Release deployment approval completed' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.deployment-approval-completed-event'
-         }
-         'Release deployment approval pending' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.deployment-approval-pending-event'
-         }
-         'Release deployment completed' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.deployment-completed-event'
-         }
-         'Release deployment started' {
-            $publisherId = 'rm'            
-            $eventId = 'ms.vss-release.deployment-started-event'
-         }
-         'Work item commented on' {
-            $publisherId = 'tfs'            
-            $eventId = 'workitem.commented'
-         }
-         'Work item created' {
-            $publisherId = 'tfs'            
-            $eventId = 'workitem.created'
-         }
-         'Work item deleted' {
-            $publisherId = 'tfs'            
-            $eventId = 'workitem.deleted'
-         }
-         'Work item restored' {
-            $publisherId = 'tfs'            
-            $eventId = 'workitem.restored'
-         }
-         'Work item updated' {
-            $publisherId = 'tfs'            
-            $eventId = 'workitem.updated'
-         }
-      }
+      $results = _parseTrigger -Trigger $Trigger
+      $publisherId = $results.publisherId
+      $eventId = $results.eventId
 
       $body = @{
          publisherId      = $publisherId
