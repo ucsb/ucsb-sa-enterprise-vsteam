@@ -1,8 +1,9 @@
 # Changelog
 
-## 6.1.1
+## 6.3.5
 
-Added
+Added:
+
 - Add-VSTeamWebHook
 - Get-VSTeamWebHook
 - Show-VSTeamWebHook
@@ -10,6 +11,176 @@ Added
 - Update-VSTeamWebHook
 - Get-VSTeamServiceHook
 - Show-VSTeamServiceHook
+
+## 6.3.4
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Rename:
+VSTS --> AzD
+*Visual Studio Team Services --> Azure DevOps
+
+## 6.3.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [quintessential5](https://github.com/quintessential5) which included the following:
+
+Get-VSTeamVariableGroup: support for getting by name as well as by ID.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/190) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Updated Add-VSTeamWorkItem and Update-VSTeamWorkItem to support any work item field, also custom ones.
+
+## 6.3.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
+
+Invalidate cache on account change
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/181) from [Michael Erpenbeck](https://github.com/GitMje) which included the following:
+
+Fixed typo in README.md file for better readability
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/179) from [Jim W](https://github.com/Seekatar) which included the following:
+
+Add PSDrive support for memberships
+
+- Memberships
+  - Groups
+    - Group1
+  - Users
+    - User1
+
+## 6.3.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
+
+- Add-VSTeamMembership
+- Remove-VSTeamMembership
+- Get-VSTeamMembership
+- Test-VSTeamMembership
+
+## 6.3.0
+
+Added support for the following:
+
+- Update-VSTeamReleaseDefinition
+
+Also added Raw and JSON support to the Get-VSTeamReleaseDefinition.
+The shape of the object returned by Get-VSTeamReleaseDefinition was slightly changed.
+Release definitions was added to the SHiPS provider.
+
+## 6.2.9
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/176) from [Carlo Wahlstedt](https://github.com/carlowahlstedt) which included the following:
+
+Updated help to refer to Add-VSTeamProfile instead of Set-VSTeamProfile
+
+## 6.2.8
+
+Added support for Get-VSTeamJobRequest. The provider was extended to show the Job Request under the Agent.
+
+- Account
+  - Agent Pools
+    - Pool1
+      - Agent1
+        - JobRequest1
+
+## 6.2.7
+
+Added support for -Raw and -Json on Get-VSTeamBuildDefinition so the objects and/or JSON can be returned in Update-VSTeamBuildDefinition.
+
+This was added so users can update Build variables from one stage to pass to the next.
+
+```PowerShell
+$b = Get-VSTeamBuildDefinition 12 -Raw
+Add-VSTeamBuildDefinition -InFile $b
+```
+
+Also merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/170) from [Ignacio Galarza, Jr.](https://github.com/ignatz42) which included the following:
+
+Added functions to deal with variable groups
+
+- Added Add-VSTeamVariableGroup to add new variable groups.
+- Added Get-VSTeamVariableGroup to get variable groups.
+- Added Update-VSTeamVariableGroup to update variable groups
+- Added Remove-VSTeamVariableGroup to remove variable groups
+
+## 6.2.6
+
+Added Update-VSTeamRelease.
+Added support for -Raw and -Json on Get-VSTeamRelease so the objects and/or JSON can be returned in Update-VSTeamRelease.
+
+This was added so users can update release variables from one stage to pass to the next.
+
+```PowerShell
+$r = Get-VSTeamRelease $(Release.ReleaseId) -Raw
+$r.variables.DEPLOYMENT_CONFIG.value = "test123"
+Update-VSTeamRelease $(Release.ReleaseId) -Release $r
+```
+
+See the help of Update-VSTeamRelease for more examples.
+
+## 6.2.5
+
+Polished the docs.
+
+## 6.2.4
+
+Added code to log error if -UseWindowsAuthentication is used to connect to Azure DevOps Services. -UseWindowsAuthentication is only for connecting to TFS or Azure DevOps Server.
+
+## 6.2.3
+
+Fixes issue [Get-VSTeamAccessControlList -IncludeExtendedInfo. Cannot convert value PSCustomObject to type Hashtable #159](https://github.com/DarqueWarrior/vsteam/issues/159)
+
+## 6.2.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/158) from [Ryan](https://github.com/RPhay) which included the following:
+
+Fixes issue [Get-VSTeamBuildDefinition fails #155](https://github.com/DarqueWarrior/vsteam/issues/155)
+
+## 6.2.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/156) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+Corrects error creating VSTeamBuildDefinitionProcessPhase object in later versions of Azure DevOps Server (TFS).
+
+## 6.2.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/144) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+Added functions to deal with Security
+Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azure DevOps Server due to unavailable APIs
+
+- Added Get-VSTeamSecurityNamespace to retrieve security namespaces
+- Added Add-VSTeamAccessControlEntry to add low level ACE's
+- Added Get-VSTeamAccessControlList to retrieve ACL's
+- Added Add-VSTeamAccessControlList to add ACL's
+- Added Add-VSTeamWorkItemIterationPermission
+- Added Get-VSTeamClassificationNode
+- Added Get-VSTeamUser (see breaking changes below)
+- Added Add-VSTeamWorkItemAreaPermission
+- Added Add-VSTeamProjectPermission
+
+**Breaking changes**:
+
+- Renamed Get-VSTeamUser to Get-VSTeamUserEntitlement
+- Renamed Add-VSTeamUser to Add-VSTeamUserEntitlement
+- Renamed Update-VSTeamUser to Update-VSTeamUserEntitlement
+- Added new Get-VSTeamUser cmdlet retrieving more data about the User itself
+
+## 6.1.3
+
+Fixed typos in Set-VSTeamAlias function.
+
+## 6.1.2
+
+Fixed issued with version 5.0 REST API JSON object for build definition. jobCancelTimeoutInMinutes appears to have moved to the build definition from the phase.
+
+## 6.1.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
+
+Fix interacting with large GIT repositories without hitting integer overflow.
 
 ## 6.1.0
 

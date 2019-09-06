@@ -15,6 +15,14 @@ Returns a Group or List of Groups.
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+```
+
+Assigns Endpoint Administrators group to $group variable.
+
 ## PARAMETERS
 
 ### -ProjectName
@@ -28,8 +36,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -74,3 +82,4 @@ Parameter Sets: ByGroupDescriptor
 ## NOTES
 
 ## RELATED LINKS
+
